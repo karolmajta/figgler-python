@@ -1,0 +1,16 @@
+db:
+  image: orchardup/postgresql
+redis:
+  image: dockerfile/redis
+mongo:
+  image: dockerfile/mongodb
+app:
+  image: dockerfile/python
+  command: bash -c "pip install -r requirements.txt && python demo.py"
+  volumes:
+    - .:/data
+  links:
+    - db
+    - redis
+    - mongo
+
