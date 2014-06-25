@@ -56,9 +56,9 @@ given your figfile looks like this:
 You will be able to access `figgler.containers.db`, `figgler.containers.mongo`
 and `figgler.containers.redis`:
 
-    >>> len(figgler.mongo)
+    >>> len(figgler.containers.mongo)
     1
-    >>> len(figgler.db)
+    >>> len(figgler.containers.db)
     1
     >>> len(figgler.mysql)  # there is no link called mysql!
     Traceback (most recent call last):
@@ -72,6 +72,8 @@ These list contains `FigURI` objects of which each has:
      be **tcp**
   - `host` the *host* this container can be reached at
   - `port` the *port* this container can be reached at
+
+You can access them as regular object properties:
 
     >>> figgler.containers.db[0].uri
     tcp://172.17.0.3:5432
