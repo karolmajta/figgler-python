@@ -45,7 +45,7 @@ class RunUnittests(distutils.core.Command):
         
 setup(
     name = "figgler",
-    version = "1.0.0",
+    version = "1.0.1",
     package_dir = {
         '': 'src',
     },
@@ -59,7 +59,7 @@ setup(
     author_email = "karolmajta@gmail.com",
     description = "Utilities for reading environment variables in containers instrumented with fig.",
     license = "MIT",
-    url = "https://github.com/karolmajta/figgler",
+    url = "https://github.com/karolmajta/figgler-python",
     
     cmdclass = {
         'test': RunUnittests,
