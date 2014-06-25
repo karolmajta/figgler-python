@@ -1,6 +1,6 @@
 import re
 
-FIG_ENV_REGEX = re.compile('^([A-Z0-9]+_)+\d+_PORT$')
+FIG_ENV_REGEX = re.compile(r'^([A-Z0-9]+_)+\d+_PORT_\d+_TCP$')
 
 
 def figvars(environ):

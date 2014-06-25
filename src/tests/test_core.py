@@ -6,14 +6,17 @@ from figgler.core import FIG_ENV_REGEX, figvars, FigURI, container_name, groupby
 
 class FigenvRegexTestCase(unittest.TestCase):
 
-    def testMatchesFirstInstance(self):
-        self.assertRegexpMatches('DB_1_PORT', FIG_ENV_REGEX)
+    def testDoesMatchEnvvarWithPortChunk(self):
+        self.assertRegexpMatches('DB_1_PORT_8000_TCP', FIG_ENV_REGEX)
+
+    def testDoesntMatchEnvvarWithoutPortChunk(self):
+        self.assertNotRegexpMatches('DB_2_PORT', FIG_ENV_REGEX)
 
     def testMatchesNthInstance(self):
-        self.assertRegexpMatches('DB_28_PORT', FIG_ENV_REGEX)
+        self.assertRegexpMatches('DB_28_PORT_5000_TCP', FIG_ENV_REGEX)
 
     def testMatchesNamesWithUnerscores(self):
-        self.assertRegexpMatches('MONGO_DB_12_PORT', FIG_ENV_REGEX)
+        self.assertRegexpMatches('MONGO_DB_12_PORT_27001_TCP', FIG_ENV_REGEX)
 
     def testDoesntMatchWhatDoesntLookLikeFigEnvvar(self):
         self.assertNotRegexpMatches('MONGO_PORT_30', FIG_ENV_REGEX)
@@ -24,14 +27,13 @@ class FigvarsTestCase(unittest.TestCase):
     def testWillFilterOnlyWhatLooksLikeFigEnvvar(self):
         allvars = {
             "HOME": "asd", "JAVA_HOME": "", "PATH": "/bin", "container": "lxc",
-            "somethingWeird": "", "PORT_3000": "something", "DB_1_PORT": "tcp://172.12.0.2",
-            "DB_28_PORT": "tcp://172.12.0.8", "POSTGRES_PORT": "tcp:172.10.1.2",
-            "POSTGRES_2_PORT": "tcp://172.12.0.6", "OTHERSERVICE_1_PORT": "tcp://172.12.0.10",
-            "OTHERSERVICE_NOTFIG": "whatever..."
+            "somethingWeird": "", "PORT_3000": "something", "DB_1_PORT_43000_TCP": "tcp://172.12.0.2",
+            "DB_28_PORT_28_TCP": "tcp://172.12.0.8", "POSTGRES_PORT": "tcp:172.10.1.2",
+            "POSTGRES_2_PORT_5432_TCP": "tcp://172.12.0.6", "OTHERSERVICE_NOTFIG": "whatever..."
         }
         expected = {
-            "DB_1_PORT": "tcp://172.12.0.2", "DB_28_PORT": "tcp://172.12.0.8",
-            "POSTGRES_2_PORT": "tcp://172.12.0.6", "OTHERSERVICE_1_PORT": "tcp://172.12.0.10"
+            "DB_1_PORT_43000_TCP": "tcp://172.12.0.2", "DB_28_PORT_28_TCP": "tcp://172.12.0.8",
+            "POSTGRES_2_PORT_5432_TCP": "tcp://172.12.0.6"
         }
         self.assertDictEqual(figvars(allvars), expected)
 
