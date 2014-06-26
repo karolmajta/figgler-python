@@ -114,7 +114,7 @@ class WatchSource(distutils.core.Command):
         
 setup(
     name = "figgler",
-    version = "1.1.0",
+    version = "1.1.1",
     package_dir = {
         '': 'src',
     },
@@ -122,7 +122,9 @@ setup(
         'figgler',
     ],
 
-    install_requires = [],
+    install_requires = [
+        'watchdog==0.7.1'
+    ],
 
     author = "Karol Majta",
     author_email = "karolmajta@gmail.com",

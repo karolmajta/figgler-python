@@ -1,3 +1,7 @@
+# 1.1.1
+
+  - Added `watchdog` package as dependency. This is a temportary fix.
+
 # 1.1.0
 
   - Instead of having single `port` property, now each container has `ports`
