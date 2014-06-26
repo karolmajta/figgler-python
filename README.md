@@ -29,12 +29,14 @@ were injected into yours:
 
     >> import pprint
     >> pprint.pprint(figgler.environ)
-    {'DB_1_PORT': 'tcp://172.17.0.3:5432',
-     'DEMO_DB_1_PORT': 'tcp://172.17.0.3:5432',
-     'DEMO_MONGO_1_PORT': 'tcp://172.17.0.5:27017',
-     'DEMO_REDIS_1_PORT': 'tcp://172.17.0.4:6379',
-     'MONGO_1_PORT': 'tcp://172.17.0.5:27017',
-     'REDIS_1_PORT': 'tcp://172.17.0.4:6379'}
+    {'DB_1_PORT_5432_TCP': 'tcp://172.17.0.18:5432',
+     'DEMO_DB_1_PORT_5432_TCP': 'tcp://172.17.0.18:5432',
+     'DEMO_MONGO_1_PORT_27017_TCP': 'tcp://172.17.0.20:27017',
+     'DEMO_MONGO_1_PORT_28017_TCP': 'tcp://172.17.0.20:28017',
+     'DEMO_REDIS_1_PORT_6379_TCP': 'tcp://172.17.0.19:6379',
+     'MONGO_1_PORT_27017_TCP': 'tcp://172.17.0.20:27017',
+     'MONGO_1_PORT_28017_TCP': 'tcp://172.17.0.20:28017',
+     'REDIS_1_PORT_6379_TCP': 'tcp://172.17.0.19:6379'}
 
 `figgler` object exposes `figgler.containers` which will resemble
 whatever links were configured in your `fig.yml`, for example
@@ -70,7 +72,6 @@ and `figgler.containers.redis`:
 
 These list contains `FigURI` objects of which each has:
 
-  - `uri` the full *uri* of container
   - `protocol` this is the *protocol* part of *uri* and most likely will
      be **tcp**
   - `host` the *host* this container can be reached at
@@ -78,8 +79,6 @@ These list contains `FigURI` objects of which each has:
 
 You can access them as regular object properties:
 
-    >>> figgler.containers.db[0].uri
-    tcp://172.17.0.3:5432
     >>> figgler.containers.db[0].protocol
     tcp
     >>> figgler.containers.db[0].host
