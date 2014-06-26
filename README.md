@@ -1,6 +1,10 @@
 figgler-python
 ==============
 
+**figgler-python** is an utility for providing seamless experience
+when detecting cooperating docker containers when running fig-instrumented
+python applications.
+
 # installation
 
 ## for production use
@@ -59,7 +63,7 @@ and `figgler.containers.redis`:
     1
     >>> len(figgler.containers.db)
     1
-    >>> len(figgler.mysql)  # there is no link called mysql!
+    >>> len(figgler.mysql  # there is no link called mysql!
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
     AttributeError: 'Containers' object has no attribute 'mysql'
@@ -70,7 +74,7 @@ These list contains `FigURI` objects of which each has:
   - `protocol` this is the *protocol* part of *uri* and most likely will
      be **tcp**
   - `host` the *host* this container can be reached at
-  - `port` the *port* this container can be reached at
+  - `ports` the list of *ports* this container can be reached at, sorted ascending
 
 You can access them as regular object properties:
 
@@ -80,10 +84,10 @@ You can access them as regular object properties:
     tcp
     >>> figgler.containers.db[0].host
     172.17.0.3
-    >>> figgler.containers.db[0].port
-    5432
+    >>> figgler.containers.db[0].ports
+    ['5432']
     >>> # of course you can only reach as many containers of each type 
-    ... # as many containers are running. By default fill will instument
+    ... # as many containers are running. By default fig will instument
     ... # one of each type, so we only have one `mongo` container in the list
     ...
     >>> figgler.containers.mongo[1]
@@ -100,6 +104,10 @@ Then run your app container in which you can get:
 
     >>> figgler.containers.redis[1].host
     172.17.0.8
+    >>> figgler.containers.mongo[1].ports
+    ['27017', '28017']
+    >>> # note that mongo container exposes two ports, and they are both
+    ... # available in the list
 
 For more info check out the demo directory of this repo. The only things you need
 to run it are *docker* and *fig*.
