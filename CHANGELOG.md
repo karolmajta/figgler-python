@@ -1,3 +1,7 @@
+# 1.1.2
+
+  - Removed unnecessary dependency on `watchdog`.
+
 # 1.1.1
 
   - Added `watchdog` package as dependency. This is a temportary fix.

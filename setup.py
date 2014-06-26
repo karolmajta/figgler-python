@@ -10,9 +10,6 @@ import distutils.core
 import distutils.errors
 import distutils.dist
 
-import watchdog.events
-import watchdog.observers
-
 
 class FailedTestsError(distutils.errors.DistutilsError):
     """One or more tests failed"""
@@ -48,73 +45,10 @@ class RunUnittests(distutils.core.Command):
             msg = tpl.format(len(result.failures), len(result.errors))
             raise FailedTestsError(msg)
 
-
-class WatchCommandRunner(watchdog.events.FileSystemEventHandler):
-    """
-    On any change will execute commands provided to constructor.
-    If anyone of them changes will skip following ones and wait for
-    changes again.
-    """
-
-    def __init__(self, *args):
-        self.commands = args
-        self.timestamp = time.time()
-
-    def on_any_event(self, event):
-        # add a little throttling
-        now = time.time()
-        if now - self.timestamp < 0.5:
-            return
-        else:
-            self.timestamp = now
-        print
-        skip = False
-        for command in self.commands:
-            print "Filesystem change detected..."
-            if not skip:
-                print "------------------ `{0}` ------------------".format(command)
-                retval = subprocess.call(["python", "setup.py", command])
-                if retval != 0:
-                    print "command `{}` failed. Skipping further commands.".format(command)
-                    skip = True
-                print "-------------------------------------------"
-            else:
-                print "skipping `{}`".format(command)
-        skip = False
-        print
-        print "Watching for changes..."
-
-
-class WatchSource(distutils.core.Command):
-    """Watches `src` directory for file changes and runs tests"""
-    description = "watch for source changes and run specified commands"
-    user_options = [
-        ('commands=', 'c', "Whitespace separated list of commands to run on file change")
-    ]
-
-    def initialize_options(self):
-        self.commands = None
-
-    def finalize_options(self):
-        self.commands = self.commands.split()
-
-    def run(self):
-        event_handler = WatchCommandRunner(*self.commands)
-        observer = watchdog.observers.Observer()
-        observer.schedule(event_handler, 'src', recursive=True)
-        observer.start()
-        try:
-            while True:
-                time.sleep(1)
-        except KeyboardInterrupt:
-            observer.stop()
-        observer.join()
-
-
-        
+ 
 setup(
     name = "figgler",
-    version = "1.1.1",
+    version = "1.1.2",
     package_dir = {
         '': 'src',
     },
@@ -122,9 +56,7 @@ setup(
         'figgler',
     ],
 
-    install_requires = [
-        'watchdog==0.7.1'
-    ],
+    install_requires = [],
 
     author = "Karol Majta",
     author_email = "karolmajta@gmail.com",

@@ -11,7 +11,6 @@ figgler-python
 
     $ git clone https://github.com/karolmajta/figgler-python.git
     $ cd figgler-python.git
-    $ pip install -r requirements.txt
     $ python setup.py test
 
 # usage
