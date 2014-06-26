@@ -66,6 +66,5 @@ setup(
     
     cmdclass = {
         'test': RunUnittests,
-        'watch': WatchSource
     },
 )
