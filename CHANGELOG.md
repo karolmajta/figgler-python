@@ -1,3 +1,7 @@
+# 1.1.3
+
+  - Added `__repr__` method to `FigURI` for better printed messages
+
 # 1.1.2
 
   - Removed unnecessary dependency on `watchdog`.

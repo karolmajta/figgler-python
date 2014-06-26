@@ -1,1 +1,1 @@
-figgler==1.1.2
+figgler==1.1.3

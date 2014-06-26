@@ -48,7 +48,7 @@ class RunUnittests(distutils.core.Command):
  
 setup(
     name = "figgler",
-    version = "1.1.2",
+    version = "1.1.3",
     package_dir = {
         '': 'src',
     },

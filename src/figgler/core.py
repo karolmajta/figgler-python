@@ -61,6 +61,14 @@ class FigURI(object):
         self.host = container['host']
         self.ports = container['ports']
 
+    def __repr__(self):
+        d = str({
+            'protocol': self.protocol,
+            'host': self.host,
+            'ports': self.ports
+        })
+        return "FigURI({})".format(d)
+
 
 class Containers(object):
     """Simple value holder for containers"""
