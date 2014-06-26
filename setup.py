@@ -114,7 +114,7 @@ class WatchSource(distutils.core.Command):
         
 setup(
     name = "figgler",
-    version = "1.0.1",
+    version = "1.1.0",
     package_dir = {
         '': 'src',
     },
