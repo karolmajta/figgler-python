@@ -1,3 +1,8 @@
+# 1.1.4
+
+  - Moved code responsible for running tests and watching tests to tasks.py.
+    This tasks are now run using invoke.
+
 # 1.1.3
 
   - Added `__repr__` method to `FigURI` for better printed messages

@@ -1,6 +1,6 @@
 # 1.1.2
 
-  - Move to `invoke` for watching source code.
+  - Move to `invoke` for watching source code. **DONE**
 
 # 1.1.1
 
