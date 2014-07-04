@@ -1,0 +1,2 @@
+invoke==0.8.2
+watchdog==0.7.1

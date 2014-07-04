@@ -15,7 +15,9 @@ python applications.
 
     $ git clone https://github.com/karolmajta/figgler-python.git
     $ cd figgler-python.git
-    $ python setup.py test
+    $ pip install -r requirements.txt
+    $ invoke unittest  # to run tests and check if everything is fine
+    $ invoke watch     # to start a file watcher and do some awesome changes
 
 # usage
 
